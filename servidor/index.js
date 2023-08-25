@@ -64,12 +64,16 @@ app.get('/usuario/cadastrar', async function(req, res){
 app.post('/usuario/cadastrar', (req, res) => {
   try {
      usuario.create(req.body);
-    res.redirect('/usuarios')
+    res.redirect('/usuarios/listar')
 } catch (err) {
     console.error(err);
     res.status(500).json({mensagem :"Deu ruim aí, tenta de novo"})
 }
   
+})
+
+app.get('/usuarios/listar', async function(req, res){
+  res.render('usuarios/listar');
 })
 
 
@@ -81,5 +85,5 @@ app.post('/deslogar', function(req, res) { //quando é para deslogar deleta o TO
 })
 
 app.listen(3000, function() {
-  console.log('App funcionando na porta 3000!')
+  console.log('App funcionando Locamente na porta 3000!')
 });

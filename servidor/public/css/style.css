@@ -2,7 +2,7 @@ body{
   background-color: rgb(77, 61, 109);
   content: '\f106';
   text-decoration: none;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .tituloForm{
   padding-left: 700px;
@@ -14,6 +14,10 @@ body{
   align-items: center;
   border: 5px white solid;
   padding: 10px;
+  border-radius: 30px;
 
+}
+input{
+  border-radius: 30px;
 }
 
