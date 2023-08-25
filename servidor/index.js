@@ -25,7 +25,7 @@ app.use(
     secret: process.env.SECRET,
     algorithms: ["HS256"],//usa pra fazer criptografia
     getToken: req => req.cookies.token
-  }).unless({ path: ["/autenticar", "/logar", "/deslogar","/usuarios","/usuario/cadastrar"] })
+  }).unless({ path: ["/autenticar", "/logar", "/deslogar","/usuarios","/usuario/cadastrar","/usuarios/listar"] })
 );
 
 app.get('/autenticar', async function(req, res){
@@ -73,9 +73,14 @@ app.post('/usuario/cadastrar', (req, res) => {
 })
 
 app.get('/usuarios/listar', async function(req, res){
-  res.render('usuarios/listar');
+  try {
+    var usuarios = await usuario.findAll();
+    res.render('index', { usuarios });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Ocorreu um erro ao buscar os usuário.' });
+  }
 })
-
 
 app.post('/deslogar', function(req, res) { //quando é para deslogar deleta o TOKEN
   res.cookie('token', null, {httpOnly:true});
