@@ -9,10 +9,11 @@
 </head>
 <body>
     <h1>Usuários:</h1>
-    <form class="usuariosclass" action="/usuarios/listar" method="get">
-    <% usuarios.forEach((usuario) => { %>
-        <%= usuario.nome%>
-    <% }) %>
+    <form action="/usuarios/listar" method="get">
+        <% usuarios.forEach((usuario) => { %>
+            <%= usuario.nome %> </p>
+            <%= usuario.senha %> </p>
+        <% }) %>
     </form>
 </body>
 </html>

@@ -32,9 +32,6 @@ app.get('/autenticar', async function(req, res){
   res.render('autenticar');
 })
 
-app.get('/usuarios', async function(req, res){
-  res.render('usuarios');
-})
 
 app.get('/', async function(req, res){
   res.render('home')
@@ -57,19 +54,18 @@ app.post('/logar', (req, res) => {
  res.status(500).json({mensagem :"Deu ruim aí brow"})
 })
 
-app.get('/usuario/cadastrar', async function(req, res){
+app.get('/usuario/cadastrar', function(req, res) {
   res.render('usuario/cadastrar');
 })
 
-app.post('/usuario/cadastrar', (req, res) => {
+app.post('/usuario/cadastrar', async function(req, res){
   try {
-     usuario.create(req.body);
-    res.redirect('/usuarios/listar')
-} catch (err) {
-    console.error(err);
-    res.status(500).json({mensagem :"Deu ruim aí, tenta de novo"})
-}
-  
+      await usuario.create(req.body);
+      res.redirect('/usuarios/listar')
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Deu ruim aí, tenta de novo' });
+  }
 })
 
 app.get('/usuarios/listar', async function(req, res){
@@ -90,5 +86,5 @@ app.post('/deslogar', function(req, res) { //quando é para deslogar deleta o TO
 })
 
 app.listen(3000, function() {
-  console.log('App funcionando Locamente na porta 3000!')
+  console.log('App funcionando locamente na porta 3000!')
 });
