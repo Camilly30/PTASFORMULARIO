@@ -58,9 +58,9 @@ app.get('/usuario/cadastrar', function(req, res) {
   res.render('usuario/cadastrar');
 })
 
-app.post('/usuario/cadastrar', async function(req, res){
+app.post('/usuario/cadastrar',(req, res) =>{
   try {
-      await usuario.create(req.body);
+       usuario.create(req.body);
       res.redirect('/usuarios/listar')
   } catch (err) {
       console.error(err);
