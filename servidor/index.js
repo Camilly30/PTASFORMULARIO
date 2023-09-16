@@ -25,7 +25,7 @@ app.use(
     secret: process.env.SECRET,
     algorithms: ["HS256"],//usa pra fazer criptografia
     getToken: req => req.cookies.token
-  }).unless({ path: ["/autenticar", "/logar", "/deslogar","/usuarios","/usuario/cadastrar","/usuarios/listar"] })
+  }).unless({ path: ["/autenticar", "/logar", "/deslogar","/usuario/cadastrar","/usuarios/listar"] })
 );
 
 app.get('/autenticar', async function(req, res){
@@ -58,15 +58,22 @@ app.get('/usuario/cadastrar', function(req, res) {
   res.render('usuario/cadastrar');
 })
 
-app.post('/usuario/cadastrar',(req, res) =>{
-  try {
-       usuario.create(req.body);
-      res.redirect('/usuarios/listar')
-  } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: 'Deu ruim aí, tenta de novo' });
+app.post("/usuario/cadastrar", async function (req,res){
+  if (req.body.senha == req.body.senhaConfirm) {
+    console.log(req.body);
+    
+    await usuario.create(req.body)
+    res.redirect("/usuarios/listar")
+
+    const encrypted_key = crypto.encrypt(req.body.senha);
+    console.log(encrypted_key)
+    
+    const decrypted_key = crypto.decrypt(encrypted_key);
+    console.log(decrypted_key)
+  } else {
+    res.status(500).json({message:"Deu ruim aí em cadastrar.. Tente novamente"})
   }
-})
+ })
 
 app.get('/usuarios/listar', async function(req, res){
   try {
