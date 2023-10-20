@@ -3,17 +3,17 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>listar Usuarios</title>
+    <title>Listar Usuarios</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <h1>Usuários:</h1>
-    <form action="/usuarios/listar" method="get">
+ 
         <% usuarios.forEach((usuario) => { %>
-            <%= usuario.nome %> </p>
-            <%= usuario.senha %> </p>
+           <p> <%= usuario.nome %> </p>
+           <p> <%= usuario.senha %> </p>
         <% }) %>
-    </form>
+    
 </body>
 </html>

@@ -25,7 +25,7 @@ app.use(
     secret: process.env.SECRET,
     algorithms: ["HS256"],//usa pra fazer criptografia
     getToken: req => req.cookies.token
-  }).unless({ path: ["/autenticar", "/logar", "/deslogar","/usuario/cadastrar","/usuarios/listar"] })
+  }).unless({ path: ["/autenticar", "/logar", "/deslogar","/cadastrar","/listar"] })
 );
 
 app.get('/autenticar', async function(req, res){
@@ -38,7 +38,7 @@ app.get('/', async function(req, res){
 })
 
 app.post('/logar', (req, res) => {
-  if (req.body.usuario == "Ahsoka" && req.body.senha == "123456"){
+  if (req.body.usuario == "Ahsoka" && req.body.senha == "123"){
     let id ="1";
 
     const token = jwt.sign({id }, process.env.SECRET,{ 
@@ -54,36 +54,38 @@ app.post('/logar', (req, res) => {
  res.status(500).json({mensagem :"Deu ruim aí brow"})
 })
 
-app.get('/usuario/cadastrar', function(req, res) {
-  res.render('usuario/cadastrar');
+app.get('/cadastrar', function(req, res) {
+  res.render('cadastrar');
 })
 
-app.post("/usuario/cadastrar", async function (req,res){
+app.post("/cadastrar", async function (req,res){
   if (req.body.senha == req.body.senhaConfirm) {
     console.log(req.body);
     
     await usuario.create(req.body)
-    res.redirect("/usuarios/listar")
+    res.redirect("listar")
 
     const encrypted_key = crypto.encrypt(req.body.senha);
     console.log(encrypted_key)
     
     const decrypted_key = crypto.decrypt(encrypted_key);
     console.log(decrypted_key)
+    
   } else {
     res.status(500).json({message:"Deu ruim aí em cadastrar.. Tente novamente"})
   }
  })
-
-app.get('/usuarios/listar', async function(req, res){
+ 
+app.get('/listar', async function(req, res){
   try {
     var usuarios = await usuario.findAll();
-    res.render('index', { usuarios });
+    res.render('listar', { usuarios });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Ocorreu um erro ao buscar os usuário.' });
   }
 })
+
 
 app.post('/deslogar', function(req, res) { //quando é para deslogar deleta o TOKEN
   res.cookie('token', null, {httpOnly:true});

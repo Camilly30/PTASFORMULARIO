@@ -20,4 +20,6 @@ body{
 input{
   border-radius: 30px;
 }
-
+a{
+  color: black;
+}
