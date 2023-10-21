@@ -8,7 +8,7 @@ var cookieParser = require('cookie-parser')
 
 const express = require('express');
 const { usuario } = require('./models');
-
+const crypto = require('./crypto'); 
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -38,7 +38,7 @@ app.get('/', async function(req, res){
 })
 
 app.post('/logar', (req, res) => {
-  if (req.body.usuario == "Ahsoka" && req.body.senha == "123"){
+  if (req.body.usuario == "mimy" && req.body.senha == "123"){
     let id ="1";
 
     const token = jwt.sign({id }, process.env.SECRET,{ 
@@ -63,7 +63,7 @@ app.post("/cadastrar", async function (req,res){
     console.log(req.body);
     
     await usuario.create(req.body)
-    res.redirect("listar")
+    res.redirect('/listar')
 
     const encrypted_key = crypto.encrypt(req.body.senha);
     console.log(encrypted_key)
@@ -80,6 +80,7 @@ app.get('/listar', async function(req, res){
   try {
     var usuarios = await usuario.findAll();
     res.render('listar', { usuarios });
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Ocorreu um erro ao buscar os usuário.' });
