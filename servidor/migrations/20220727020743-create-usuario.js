@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      usuario: {
+      name: {
         type: Sequelize.STRING
       },
       senha: {
@@ -31,3 +31,4 @@ module.exports = {
     await queryInterface.dropTable('usuarios');
   }
 };
+

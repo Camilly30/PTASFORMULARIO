@@ -38,7 +38,7 @@ app.get('/', async function(req, res){
 })
 
 app.post('/logar', (req, res) => {
-  if (req.body.usuario == "mimy" && req.body.senha == "123"){
+  if (req.body.name == "mimy" && req.body.senha == "123"){
     let id ="1";
 
     const token = jwt.sign({id }, process.env.SECRET,{ 
@@ -46,7 +46,7 @@ app.post('/logar', (req, res) => {
     })
     res.cookie('token',token, {httpOnly:true});
      return res.json({
-      usuario: req.body.usuario,
+      name: req.body.name,
       senha : req.body.senha,
       token: token
      })
@@ -62,15 +62,11 @@ app.post("/cadastrar", async function (req,res){
   if (req.body.senha == req.body.senhaConfirm) {
     console.log(req.body);
     
-    await usuario.create(req.body)
-    res.redirect('/listar')
+    let criatura = req.body
+    criatura.senha= crypto.encrypt(req.body.senha)
 
-    const encrypted_key = crypto.encrypt(req.body.senha);
-    console.log(encrypted_key)
-    
-    const decrypted_key = crypto.decrypt(encrypted_key);
-    console.log(decrypted_key)
-    
+    await usuario.create(criatura);
+    res.redirect('listar')
   } else {
     res.status(500).json({message:"Deu ruim aí em cadastrar.. Tente novamente"})
   }
@@ -89,11 +85,12 @@ app.get('/listar', async function(req, res){
 
 
 app.post('/deslogar', function(req, res) { //quando é para deslogar deleta o TOKEN
-  res.cookie('token', null, {httpOnly:true});
+  res.cookie('logar', null, {httpOnly:true});
    res.json({
    deslogado:true
    })
 })
+
 
 app.listen(3000, function() {
   console.log('App funcionando locamente na porta 3000!')
