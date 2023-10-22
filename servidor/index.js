@@ -37,22 +37,28 @@ app.get('/', async function(req, res){
   res.render('home')
 })
 
-app.post('/logar', (req, res) => {
-  if (req.body.name == "mimy" && req.body.senha == "123"){
-    let id ="1";
-
-    const token = jwt.sign({id }, process.env.SECRET,{ 
-      expiresIn:3003
+app.post('/logar', async (req, res) => {
+  const azul = await usuario.findOne ({ 
+    where: { name: req.body.name, senha: crypto.encrypt(req.body.senha) 
+    } });
+  if(azul) {
+    const id = 1;
+    const token = jwt.sign({ id }, process.env.SECRET, {
+      expiresIn: 3005
     })
-    res.cookie('token',token, {httpOnly:true});
-     return res.json({
+    res.cookie('token', token, {httpOnly:true});
+    return res.json({
+      usuario: req.body.usuario,
       name: req.body.name,
-      senha : req.body.senha,
-      token: token
-     })
+      token: token,
+      message:'Welcome Princess!',
+     
+    })
   }
- res.status(500).json({mensagem :"Deu ruim aí brow"})
+  res.status(500).json({mensagem :"Deu ruim aí brow"})
 })
+  
+
 
 app.get('/cadastrar', function(req, res) {
   res.render('cadastrar');
@@ -74,12 +80,12 @@ app.post("/cadastrar", async function (req,res){
  
 app.get('/listar', async function(req, res){
   try {
-    var usuarios = await usuario.findAll();
-    res.render('listar', { usuarios });
+    var criatura = await usuario.findAll();
+    res.render('listar', { criatura });
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Ocorreu um erro ao buscar os usuário.' });
+    res.status(500).json({ message: 'Ocorreu um erro ao buscar os Indivíduos...' });
   }
 })
 

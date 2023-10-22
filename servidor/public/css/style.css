@@ -1,14 +1,17 @@
 body{
-  background-color: rgb(77, 61, 109);
+  background-color: rgb(43, 29, 71);
   content: '\f106';
   text-decoration: none;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgb(218, 206, 192);
+  margin: 30px;
+  
 }
 .tituloForm{
   padding-left: 700px;
 }
 .formCadastro{
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(218, 206, 192);
   display: grid;
   max-width: 50%;
   align-items: center;
@@ -18,8 +21,24 @@ body{
 
 }
 input{
-  border-radius: 30px;
+  border-radius: 30px ;
+  margin: 3px;
+  background-color:transparent;
+  border-color: rgb(218, 206, 192);
+  color:rgb(218, 206, 192)
+}
+.botaoEnviar{
+  color:rgb(43, 29, 71) ;
+  background-color:rgb(218, 206, 192);
+
 }
 a{
-  color: black;
+  color: rgb(218, 206, 192);
+}
+
+h3 a{
+  color: none;
+  text-decoration: none;
+  width: 50px;
+ 
 }

@@ -10,11 +10,12 @@
 <body>
     <h1>Usuários:</h1>
  
-      <% usuarios.forEach((usuario) => { %>
-            <%= usuario.id %> 
-            <%= usuario.name %> <br/>
+      <% criatura.forEach((usuario) => { %>
+            ➡️<%= usuario.name %> <br/>
+            <%= usuario.senha %><br/>
           
         <% }) %>
-
+    <h2><a href="./cadastrar">Cadastrar novo Usuário </a></h2>
+    <h3><a href="./">← Voltar</a></h3>
 </body>
 </html>
