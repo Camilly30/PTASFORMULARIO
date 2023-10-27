@@ -91,7 +91,7 @@ app.get('/listar', async function(req, res){
 
 
 app.post('/deslogar', function(req, res) { //quando é para deslogar deleta o TOKEN
-  res.cookie('logar', null, {httpOnly:true});
+  res.cookie('token', null, {httpOnly:true});
    res.json({
    deslogado:true
    })
