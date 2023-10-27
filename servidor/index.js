@@ -22,7 +22,7 @@ app.use(express.static('public'));
 app.use(cookieParser());//
 app.use(
   expressJWT({
-    secret: process.env.SECRET,
+    secret: process.env.SECRET, // Define a chave secreta do JWT a partir de variáveis de ambiente
     algorithms: ["HS256"],//usa pra fazer criptografia
     getToken: req => req.cookies.token
   }).unless({ path: ["/autenticar", "/logar", "/deslogar","/cadastrar","/listar"] })
@@ -38,7 +38,7 @@ app.get('/', async function(req, res){
 })
 
 app.post('/logar', async (req, res) => {
-  const azul = await usuario.findOne ({ 
+  const azul = await usuario.findOne ({   // Se a autenticação for bem-sucedida, cria um token JWT e o define como um cookie
     where: { name: req.body.name, senha: crypto.encrypt(req.body.senha) 
     } });
   if(azul) {

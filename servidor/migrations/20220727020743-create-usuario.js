@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {// método "up", que é usado para criar tabela 
     await queryInterface.createTable('usuarios', {
       id: {
         allowNull: false,
