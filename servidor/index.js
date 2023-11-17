@@ -48,7 +48,7 @@ app.post('/logar', async (req, res) => {
     })
     res.cookie('token', token, {httpOnly:true});
     return res.json({
-      usuario: req.body.usuario,
+      //usuario: req.body.usuario,
       name: req.body.name,
       token: token,
       message:'Welcome Princess!',
