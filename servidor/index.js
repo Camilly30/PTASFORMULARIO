@@ -2,7 +2,15 @@
 require("dotenv-safe").config();
 const jwt = require('jsonwebtoken');
 var { expressjwt: expressJWT } = require("express-jwt");
+
 const cors = require('cors');
+
+const corsOpration = {
+    origin:"https://localhost:3000",
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders:"Content-Type,Authorization",
+    credentials: true
+}
 
 var cookieParser = require('cookie-parser')
 
@@ -13,7 +21,7 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
-app.use(cors());
+app.use(cors(corsOpration));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
@@ -46,14 +54,16 @@ app.post('/logar', async (req, res) => {
     const token = jwt.sign({ id }, process.env.SECRET, {
       expiresIn: 3005
     })
-    res.cookie('token', token, {httpOnly:true});
-    return res.json({
-      //usuario: req.body.usuario,
+    res.cookie('token', token, {httpOnly:true}).json({ //retorna um json
+      name: azul.name,
+      token: token,
+    });
+    /*return res.json({
       name: req.body.name,
       token: token,
       message:'Welcome Princess!',
      
-    })
+    })*/
   }
   res.status(500).json({mensagem :"Deu ruim aí brow"})
 })
@@ -81,7 +91,7 @@ app.post("/cadastrar", async function (req,res){
 app.get('/listar', async function(req, res){
   try {
     var criatura = await usuario.findAll();
-    res.render('listar', { criatura });
+    res.json( criatura );
 
   } catch (err) {
     console.error(err);
