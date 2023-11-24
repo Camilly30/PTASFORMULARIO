@@ -58,12 +58,6 @@ app.post('/logar', async (req, res) => {
       name: azul.name,
       token: token,
     });
-    /*return res.json({
-      name: req.body.name,
-      token: token,
-      message:'Welcome Princess!',
-     
-    })*/
   }
   res.status(500).json({mensagem :"Deu ruim aí brow"})
 })
@@ -109,5 +103,5 @@ app.post('/deslogar', function(req, res) { //quando é para deslogar deleta o TO
 
 
 app.listen(3000, function() {
-  console.log('App funcionando locamente na porta 3000!')
+  console.log('App funcionando locamente na porta 4000!')
 });

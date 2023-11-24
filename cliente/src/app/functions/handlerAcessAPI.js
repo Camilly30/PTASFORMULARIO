@@ -1,10 +1,12 @@
 
 'use server'
 
+import { cookies } from "next/dist/client/components/headers";
+
 //milllybacarim@gmail.com senha:123
 
 
-const url ="https://aula-17-10-nu.vercel.app";
+const url ="http://localhost:4000";
 
 const postUser = async (user) =>{
     try{
@@ -25,7 +27,7 @@ const postUser = async (user) =>{
 const getUserAuthenticated = async (user) => {
     console.log(user)
     try{
-         const responseOfApi = await fetch(url +"/user/authenticated",
+         const responseOfApi = await fetch(url +"/logar",
          {
             cache:"no-cache",
             method:"POST",
@@ -52,6 +54,23 @@ const getUsers = async() =>{
         return null 
 }
 }
-export { getUsers, getUserAuthenticated, postUser};
+const updateUser = async (user,id) => {
+    const token = cookies().get('token')?.value;
+    try{
+        const responseOfApi = await fetch(`${url} +/user/+${id}`,{
+            method:"PUT",
+            headers:{"Content-Type":"Application/json",
+            Cookie: `token=${token}`
+        },
+        body: JSON.stringify(user)
+    });
+    const userSave = await responseOfApi.json();
+    return userSave;
+    }catch{
+        return null;
+}
+}
+//rota para alterrar o ususario 
+export { getUsers, getUserAuthenticated, updateUser, postUser};
 
 
