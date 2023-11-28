@@ -4,12 +4,13 @@ import handlerAcessUser from "./functions/handlerAcess"
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { errors } from "jose";
 
 
 export default function Login() {
   const [user, setUser] = useState({
     name: '',
-    password: '',
+    senha: '',
   });
   const { push, refresh } = useRouter();
 
@@ -23,16 +24,17 @@ export default function Login() {
       push('/pages/dashboard');
     } catch {
       toast.error ("Erro na Aplicação")
+      
     }
   }
   return (
     <div className="login">
       <div className="card-header"><h1>Login</h1></div>
       <div className="b">
-         <form  class="card" onSubmit={handlerLogin}>
-           <div class="card-content">
-             <div class="card-content-area"><input placeholder='Name' type='text' onChange={(e) => { setUser({ ...user, name: e.target.value }) }}></input></div>
-             <div class="card-content-area"><input placeholder='Senha' type='password' onChange={(e) => { setUser({ ...user, password: e.target.value }) }}></input></div>
+         <form  className="card" onSubmit={handlerLogin}>
+           <div className="card-content">
+             <div className="card-content-area"><input placeholder='Name' type='text' onChange={(e) => { setUser({ ...user, name: e.target.value }) }}></input></div>
+             <div className="card-content-area"><input placeholder='Senha' type='password' onChange={(e) => { setUser({ ...user, senha: e.target.value }) }}></input></div>
             </div>
         <button>Entrar</button>
       <ToastContainer/>

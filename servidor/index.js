@@ -6,9 +6,9 @@ var { expressjwt: expressJWT } = require("express-jwt");
 const cors = require('cors');
 
 const corsOpration = {
-    origin:"https://localhost:3000",
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders:"Content-Type,Authorization",
+    origin:"https://localhost:3001",
+    methods: "GET, POST, PUT, DELETE",
+    allowedHeaders:"Content-type, Authorization",
     credentials: true
 }
 
@@ -103,5 +103,5 @@ app.post('/deslogar', function(req, res) { //quando é para deslogar deleta o TO
 
 
 app.listen(3000, function() {
-  console.log('App funcionando locamente na porta 4000!')
+  console.log('App funcionando locamente na porta 3000!')
 });

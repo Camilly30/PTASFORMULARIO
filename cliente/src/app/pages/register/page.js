@@ -12,7 +12,7 @@ export default function RegisterForm() {
   const [user, setUser] = useState({
     name: '',
     email: '',
-    password: '',
+    senha: '',
   });
   const { push } = useRouter();
 
@@ -41,7 +41,7 @@ export default function RegisterForm() {
           <div className="card-content">
             <div className="card-content-area"><input placeholder='Nome' type='text' onChange={(e) => { setUser({ ...user, name: e.target.value }) }}></input></div>
             <div className="card-content-area"><input placeholder='E-mail' type='email' onChange={(e) => { setUser({ ...user, email: e.target.value }) }}></input></div>
-            <div className="card-content-area"><input placeholder='Senha' type='password' onChange={(e) => { setUser({ ...user, password: e.target.value }) }}></input></div>
+            <div className="card-content-area"><input placeholder='Senha' type='password' onChange={(e) => { setUser({ ...user, senha: e.target.value }) }}></input></div>
           </div>
           <button>Registrar</button>
           <ToastContainer />

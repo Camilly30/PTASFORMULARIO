@@ -4,16 +4,16 @@
 import { cookies } from "next/dist/client/components/headers";
 
 //milllybacarim@gmail.com senha:123
+//mimy senha:123
 
-
-const url ="http://localhost:4000";
+const url ="http://localhost:3000";
 
 const postUser = async (user) =>{
     try{
         const responseOfApi = await fetch(url +"/user",
         {
            method:"POST",
-           headers:{"Content-Type":"Application/json"},
+           headers:{"Content-type":"Application/json"},
            body: JSON.stringify(user)
         }
         );
@@ -31,7 +31,7 @@ const getUserAuthenticated = async (user) => {
          {
             cache:"no-cache",
             method:"POST",
-            headers:{"Content-Type":"Application/json"},
+            headers:{"Content-type":"Application/json"},
             body: JSON.stringify(user)
          }
          );
@@ -59,7 +59,7 @@ const updateUser = async (user,id) => {
     try{
         const responseOfApi = await fetch(`${url} +/user/+${id}`,{
             method:"PUT",
-            headers:{"Content-Type":"Application/json",
+            headers:{"Content-type":"Application/json",
             Cookie: `token=${token}`
         },
         body: JSON.stringify(user)

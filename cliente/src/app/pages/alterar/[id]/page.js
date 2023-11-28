@@ -9,14 +9,14 @@ const FormAlterar= () => {
   const [user, setUser] = useState({
     name:'',
     email: '',
-    password: '',
+    senha: '',
   });
   const { refresh } = useRouter();
 
   useEffect(()=>{
     const findUser = async () =>{
      const userFind = await getUser(params.id);
-     setUser({...user,  name:  userFind.name, email: userFind.email, password: userFind.password});
+     setUser({...user,  name:  userFind.name, email: userFind.email, senha: userFind.senha});
   }
   findUser();
   },[])
@@ -64,7 +64,7 @@ const FormAlterar= () => {
                 placeholder="Senha"
                 type="password"
                 onChange={(e) => {
-                  setUser({ ...user, password: e.target.value });
+                  setUser({ ...user, senha: e.target.value });
                 }}
               ></input>
             </div>
