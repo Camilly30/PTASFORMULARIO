@@ -54,7 +54,7 @@ app.post('/logar', async (req, res) => {
     const token = jwt.sign({ id }, process.env.SECRET, {
       expiresIn: 3005
     })
-    res.cookie('token', token, {httpOnly:true}).json({ //retorna um json
+    return res.cookie('token', token, {httpOnly:true}).json({ //retorna um json
       name: azul.name,
       token: token,
     });
@@ -102,6 +102,6 @@ app.post('/deslogar', function(req, res) { //quando é para deslogar deleta o TO
 })
 
 
-app.listen(3000, function() {
-  console.log('App funcionando locamente na porta 3000!')
+app.listen(4000, function() {
+  console.log('App funcionando locamente na porta 4000!')
 });
