@@ -11,7 +11,7 @@ import { postUser } from "@/app/functions/handlerAcessAPI";
 export default function RegisterForm() {
   const [user, setUser] = useState({
     name: '',
-    email: '',
+    senhaConfirm:'',
     senha: '',
   });
   const { push } = useRouter();
@@ -40,7 +40,7 @@ export default function RegisterForm() {
         <form className="card" onSubmit={handlerRegistro}>
           <div className="card-content">
             <div className="card-content-area"><input placeholder='Nome' type='text' onChange={(e) => { setUser({ ...user, name: e.target.value }) }}></input></div>
-            <div className="card-content-area"><input placeholder='E-mail' type='email' onChange={(e) => { setUser({ ...user, email: e.target.value }) }}></input></div>
+            <div className="card-content-area"><input placeholder='Confirme sua senha' type='password' onChange={(e) => { setUser({ ...user, senhaConfirm: e.target.value }) }}></input></div>
             <div className="card-content-area"><input placeholder='Senha' type='password' onChange={(e) => { setUser({ ...user, senha: e.target.value }) }}></input></div>
           </div>
           <button>Registrar</button>

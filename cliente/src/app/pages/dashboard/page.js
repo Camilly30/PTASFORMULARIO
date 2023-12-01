@@ -17,13 +17,13 @@ export default async function Dashboard() {
                      {users.map(users => (
                     <div key={users.id}> 
                     <p>Name: {users.name}</p>
-                    <p>Email: {users.email}</p>
+                    
                     
                     </div>))}
 
             </Suspense>
             <Link href="/pages/register">Registrar</Link><br/>
-            <Link href="/pages/alterar">Alterar</Link>
+          
         </div>
     );
 };

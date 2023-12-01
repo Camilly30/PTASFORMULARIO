@@ -31,7 +31,7 @@ const getUserAuthenticated = async (user) => {
 }
 const postUser = async (user) =>{
     try{
-        const responseOfApi = await fetch(url +"/user",
+        const responseOfApi = await fetch(url +"/cadastrar",
         {
            method:"POST",
            headers:{"Content-type":"Application/json"},
