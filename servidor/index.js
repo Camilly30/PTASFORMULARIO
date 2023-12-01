@@ -46,16 +46,16 @@ app.get('/', async function(req, res){
 })
 
 app.post('/logar', async (req, res) => {
-  const azul = await usuario.findOne ({   // Se a autenticação for bem-sucedida, cria um token JWT e o define como um cookie
+  const elBanco = await usuario.findOne ({   // Se a autenticação for bem-sucedida, cria um token JWT e o define como um cookie
     where: { name: req.body.name, senha: crypto.encrypt(req.body.senha) 
     } });
-  if(azul) {
+  if(elBanco) {
     const id = 1;
     const token = jwt.sign({ id }, process.env.SECRET, {
       expiresIn: 3005
     })
     return res.cookie('token', token, {httpOnly:true}).json({ //retorna um json
-      name: azul.name,
+      name: elBanco.name,
       token: token,
     });
   }

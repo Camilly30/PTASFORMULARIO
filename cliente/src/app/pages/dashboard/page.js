@@ -23,7 +23,7 @@ export default async function Dashboard() {
 
             </Suspense>
             <Link href="/pages/register">Registrar</Link><br/>
-          
+             <Link href=""></Link>  
         </div>
     );
 };
